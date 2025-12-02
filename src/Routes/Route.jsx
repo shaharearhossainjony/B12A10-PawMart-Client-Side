@@ -5,6 +5,8 @@ import PetAndSupplies from "../Components/Pet_and_Supplies/PetAndSupplies";
 import AddListing from "../Components/AddListing/AddListing";
 import MyListings from "../Components/MyListings/MyListings";
 import MyOrders from "../Components/MyOrders/MyOrders";
+import Login from "../Components/Login/Login";
+import Register from "../Components/Register/Register";
 
 
 const router = createBrowserRouter([
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
                 element : <Home></Home>
             },
             {
-                path: "/pet&supplies",
+                path: "/pet-supplies",
                 element : <PetAndSupplies></PetAndSupplies>
             },
             {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
             {
                 path: "/myorders",
                 element : <MyOrders></MyOrders>
+            },
+            {
+                path: "/login",
+                element : <Login></Login>
+            },
+            {
+                path: "/register",
+                element : <Register></Register>
             }
         ]
     },

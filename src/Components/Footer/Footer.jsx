@@ -1,16 +1,3 @@
-// import React from 'react';
-
-// const Footer = () => {
-//   return (
-//     <div className="">
-      
-//     </div>
-//   );
-// };
-
-// export default Footer;
-
-
 import React from "react";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 

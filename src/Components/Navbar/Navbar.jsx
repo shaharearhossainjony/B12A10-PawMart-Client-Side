@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+ const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut().catch((err) => console.log(err));
+  };
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -27,44 +35,54 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
            <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Home</a>
+            <Link to={'/'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Home</Link>
           </li>
           <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Pet & Supplies</a>
+            <Link to={'/pet-supplies'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Pet & Supplies</Link>
+          </li>
+           {
+            user && <>
+             <li>
+            <Link to={'/addlisting'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Add Listing</Link>
           </li>
           <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Add Listing</a>
+            <Link to={'/mylistings'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Listings</Link>
           </li>
           <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Listings</a>
+            <Link to={'/myorders'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Orders</Link>
           </li>
-          <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Orders</a>
-          </li>
+            </>
+         }
           </ul>
         </div>
         <a className="btn btn-ghost text-xl bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent">PawMart</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Home</a>
+         <li>
+            <Link to={'/'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Home</Link>
           </li>
           <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Pet & Supplies</a>
+            <Link to={'/pet-supplies'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Pet & Supplies</Link>
+          </li>
+         {
+            user && <>
+             <li>
+            <Link to={'/addlisting'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Add Listing</Link>
           </li>
           <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>Add Listing</a>
+            <Link to={'/mylistings'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Listings</Link>
           </li>
           <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Listings</a>
+            <Link to={'/myorders'} className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Orders</Link>
           </li>
-          <li>
-            <a className='bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent'>My Orders</a>
-          </li>
+            </>
+         }
         </ul>
       </div>
-      <div className='navbar-end'>
+
+       <div className="navbar-end flex items-center gap-3">
+        <div className='navbar-end'>
           <label className="toggle text-base-content ">
             <input
               type="checkbox"
@@ -113,10 +131,23 @@ const Navbar = () => {
             </svg>
           </label>
         </div>
-      <div className="navbar-end">
-        
-
-        <a className="btn bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent">Login</a>
+        {user ? (
+          <>
+            <button
+              onClick={handleLogout}
+              className="btn bg-purple-700 hover:bg-purple-800 text-white"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <NavLink
+            to="/login"
+            className="btn bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent"
+          >
+            Login
+          </NavLink>
+        )}
       </div>
     </div>
   );
