@@ -12,7 +12,7 @@ const HeroSection = () => {
           Welcome to{" "}
           <span className="text-purple-600">
             <Typewriter
-              words={["PawMart", "Your Pet's Paradise", "Best Pet Store"]}
+              words={["PawMart 🐾", "Your Pet's Paradise", "Best Pet Store"]}
               loop={0}        
               cursor
               cursorStyle="|"

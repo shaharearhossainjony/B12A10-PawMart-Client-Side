@@ -78,7 +78,7 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost text-xl bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent"
         >
-          PawMart
+          PawMart 🐾
         </NavLink>
       </div>
 
