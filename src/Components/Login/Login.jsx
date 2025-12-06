@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
@@ -13,7 +14,6 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
- 
   const from = location.state?.from?.pathname || "/";
 
   const handleLoginBtn = (event) => {
@@ -28,6 +28,7 @@ const Login = () => {
       .then((result) => {
         console.log("Login success:", result.user);
         form.reset();
+        toast.success("Login successfully!");
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -86,18 +87,6 @@ const Login = () => {
               </div>
 
               {error && <p className="text-xs text-error">{error}</p>}
-
-              <div>
-                <Link
-                  to="/forgotpassword"
-                  state={{
-                    email: document.querySelector("input[name='email']")?.value,
-                  }}
-                  className="link link-hover"
-                >
-                  Forgot password?
-                </Link>
-              </div>
 
               <button
                 type="submit"

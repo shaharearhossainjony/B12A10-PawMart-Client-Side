@@ -10,7 +10,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  sendPasswordResetEmail,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -54,11 +53,7 @@ const AuthProvider = ({ children }) => {
   };
 
 
-  const resetPassword = (email) => {
-    setLoading(true);
-    return sendPasswordResetEmail(auth, email).finally(() => setLoading(false));
-  };
-
+ 
 
   const logOut = () => {
     setLoading(true);
@@ -83,7 +78,6 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     logOut,
     updateUser,
-    resetPassword, 
     setLoading,
   };
 

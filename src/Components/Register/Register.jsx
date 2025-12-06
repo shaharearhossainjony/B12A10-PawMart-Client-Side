@@ -4,6 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
@@ -47,8 +48,10 @@ const Register = () => {
 
     createUser(email, password)
       .then(() => {
+         toast.success("Register successfully!");
         updateUser({ displayName: name, photoURL }).then(() => {
           form.reset();
+         
           navigate("/");
         });
       })
@@ -57,7 +60,10 @@ const Register = () => {
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then(() => navigate("/"))
+      .then(() =>{
+         toast.success("Register successfully!")
+         navigate("/")
+      })
       .catch((error) => console.error(error));
   };
 
