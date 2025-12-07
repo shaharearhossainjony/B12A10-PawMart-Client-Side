@@ -8,7 +8,7 @@ const ShopByCategory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/pet-supplies")
+    fetch("https://pawmart-three.vercel.app/pet-supplies")
       .then((res) => res.json())
       .then((data) => {
         const filtered = data.filter(
@@ -35,7 +35,7 @@ const ShopByCategory = () => {
     <div className="max-w-7xl mx-auto px-4 py-12">
 
  
-      <h2 className="text-3xl font-bold mb-6">
+      <h2 className="text-3xl font-bold mb-6 ">
         Showing Results for: <span className="text-green-600">{category}</span>
       </h2>
 

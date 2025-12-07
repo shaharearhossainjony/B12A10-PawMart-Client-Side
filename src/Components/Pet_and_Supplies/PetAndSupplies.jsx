@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 import  Loader  from "../Loader/Loader.jsx";
+import StyledCardWrapper from "../../DesignElements/StyledCardWrapper.js";
 
 const PetsAndSupplies = () => {
   const { loading, setLoading } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const PetsAndSupplies = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/pet-supplies")
+      .get("https://pawmart-three.vercel.app/pet-supplies")
       .then((res) => {
         setListings(res.data);
         setFiltered(res.data);
@@ -83,9 +84,9 @@ const PetsAndSupplies = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filtered.map((item) => (
-            <div
+            <StyledCardWrapper
               key={item._id}
-              className="border rounded-lg shadow-md overflow-hidden bg-white"
+              className="border-purple-500 border rounded-lg shadow-md overflow-hidden bg-white"
             >
               <img
                 src={item.image}
@@ -94,7 +95,7 @@ const PetsAndSupplies = () => {
               />
 
               <div className="p-4">
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-[#ff7f50] to-[#ffd700] text-transparent bg-clip-text">
                   {item.name}
                 </h3>
 
@@ -125,7 +126,7 @@ const PetsAndSupplies = () => {
                   </button>
                 </Link>
               </div>
-            </div>
+            </StyledCardWrapper>
           ))}
         </div>
       )}

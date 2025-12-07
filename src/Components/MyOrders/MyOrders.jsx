@@ -4,14 +4,14 @@ import autoTable from "jspdf-autotable";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Loader from "../Loader/Loader.jsx";
 
-const MyOrdersPage = () => {
+const MyOrders = () => {
   const { user, loading, setLoading } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/orders?email=${user.email}`)
+    fetch(`https://pawmart-three.vercel.app/orders?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -134,4 +134,4 @@ const MyOrdersPage = () => {
   );
 };
 
-export default MyOrdersPage;
+export default MyOrders;

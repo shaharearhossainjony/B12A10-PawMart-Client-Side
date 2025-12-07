@@ -2,6 +2,7 @@ import React, { use, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const EditListings = () => {
   const { user } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const EditListings = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/pet-supplies/${id}`)
+      .get(`https://pawmart-three.vercel.app/pet-supplies/${id}`)
       .then((res) => {
         setListings(res.data);
         setCategory(res.data.category);
@@ -27,6 +28,9 @@ const EditListings = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+    if(!listings){
+      return;
+    }
 
     const form = e.target;
     const name = form.name.value;
@@ -51,10 +55,11 @@ const EditListings = () => {
     };
 
     axios
-      .put(`http://localhost:3000/update/${id}`, formData)
+      .put(`https://pawmart-three.vercel.app/update/${id}`, formData)
       .then((res) => {
         console.log(res.data);
         navigation("/my-listings");
+        toast.success("Listing updated successfully!");
       })
       .catch((err) => console.log(err));
   };

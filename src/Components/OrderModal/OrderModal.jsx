@@ -27,7 +27,7 @@ const OrderModal = ({ listing }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/orders", {
+    fetch("https://pawmart-three.vercel.app/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -52,7 +52,7 @@ const OrderModal = ({ listing }) => {
           </button>
         </form>
 
-        <h3 className="font-bold text-2xl mb-4">Order / Adoption Form</h3>
+        <h3 className="font-bold text-2xl mb-4 text-green-700">Order / Adoption Form</h3>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           
@@ -63,7 +63,7 @@ const OrderModal = ({ listing }) => {
               type="text"
               name="buyerName"
               readOnly
-              value={formData.buyerName}
+              value={formData?.buyerName}
               className="input input-bordered w-full mt-1"
             />
           </div>
@@ -75,7 +75,7 @@ const OrderModal = ({ listing }) => {
               type="email"
               name="buyerEmail" 
               readOnly
-              value={formData.buyerEmail}
+              value={formData?.buyerEmail}
               className="input input-bordered w-full mt-1"
             />
           </div>
@@ -86,7 +86,7 @@ const OrderModal = ({ listing }) => {
             <input
               type="text"
               readOnly
-              value={formData.productId}
+              value={formData?.productId}
               className="input input-bordered w-full mt-1"
             />
           </div>
@@ -97,7 +97,7 @@ const OrderModal = ({ listing }) => {
             <input
               type="text"
               readOnly
-              value={formData.productName}
+              value={formData?.productName}
               className="input input-bordered w-full mt-1"
             />
           </div>
@@ -109,8 +109,8 @@ const OrderModal = ({ listing }) => {
               type="number"
               name="quantity"
               min={1}
-              readOnly={listing.category.toLowerCase() === "pets"}
-              value={formData.quantity}
+              readOnly={listing?.category.toLowerCase() === "pets"}
+              value={formData?.quantity}
               onChange={handleChange}
               className="input input-bordered w-full mt-1"
             />
@@ -122,7 +122,7 @@ const OrderModal = ({ listing }) => {
             <input
               type="text"
               readOnly
-              value={formData.price === 0 ? "Free" : `$${formData.price}`}
+              value={formData.price === 0 ? "Free" : `$${formData?.price}`}
               className="input input-bordered w-full mt-1"
             />
           </div>

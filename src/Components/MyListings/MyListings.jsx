@@ -16,7 +16,7 @@ const MyListings = () => {
     setPageLoading(true);
 
     axios
-      .get(`http://localhost:3000/pet-supplies?email=${user.email}`)
+      .get(`https://pawmart-three.vercel.app/pet-supplies?email=${user.email}`)
       .then((res) => setMyListings(res.data))
       .catch((err) => console.log(err))
       .finally(() => setPageLoading(false));
@@ -35,7 +35,7 @@ const MyListings = () => {
     }).then((result) => {
       if (result.isConfirmed) {
          axios
-      .delete(`http://localhost:3000/delete/${id}`)
+      .delete(`https://pawmart-three.vercel.app/delete/${id}`)
       .then((res) => {
         if (res.data.deletedCount == 1) {
           setMyListings((prev) => prev.filter((listing) => listing._id !== id));
@@ -85,7 +85,7 @@ const MyListings = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-semibold">{listing?.name}</div>
+                      <div className="font-semibold ">{listing?.name}</div>
                       <div className="text-sm opacity-50">
                         {listing?.category}
                       </div>

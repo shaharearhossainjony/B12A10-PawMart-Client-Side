@@ -16,7 +16,7 @@ const AddService = () => {
     const formData = {
       name: form.name.value,
       category,
-      price: category === "Pets" ? 0 : parseInt(form.price.value),
+      price: category === "Pets" ? 0 : (parseInt(form.price.value) || 0),
       location: form.location.value,
       description: form.description.value,
       image: form.image.value,
@@ -26,7 +26,7 @@ const AddService = () => {
 
     console.log(formData);
 
-    axios.post("http://localhost:3000/pet-supplies", formData)
+    axios.post("https://pawmart-three.vercel.app/pet-supplies", formData)
       .then((res) => {
         console.log(res);
         form.reset();
@@ -38,7 +38,7 @@ const AddService = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-8 bg-gradient-to-br from-white via-green-50 to-white rounded-2xl shadow-lg border border-green-100">
+    <div className="max-w-xl mx-auto my-10 p-8 bg-gradient-to-br from-white via-green-50 to-white rounded-2xl shadow-lg border border-green-100">
       <h2 className="text-3xl font-bold mb-6 text-green-700 text-center">
         Create Listing
       </h2>

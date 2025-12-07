@@ -149,7 +149,7 @@ const Navbar = () => {
           <>
             <div className="group cursor-pointer">
               <img
-                src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
+                src={user?.photoURL}
                 alt="User"
                 className="w-10 h-10 rounded-full border border-purple-400"
               />
