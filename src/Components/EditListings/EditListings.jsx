@@ -1,8 +1,10 @@
-import React, { use, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
+import { Save, ArrowLeft } from "lucide-react";
 
 const EditListings = () => {
   const { user } = useContext(AuthContext);
@@ -28,9 +30,7 @@ const EditListings = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    if(!listings){
-      return;
-    }
+    if (!listings) return;
 
     const form = e.target;
     const name = form.name.value;
@@ -57,7 +57,6 @@ const EditListings = () => {
     axios
       .put(`https://pawmart-three.vercel.app/update/${id}`, formData)
       .then((res) => {
-        console.log(res.data);
         navigation("/my-listings");
         toast.success("Listing updated successfully!");
       })
@@ -65,143 +64,170 @@ const EditListings = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-8 bg-gradient-to-br from-white via-green-50 to-white rounded-2xl shadow-lg border border-green-100">
-      <h2 className="text-3xl font-bold mb-6 text-green-700 text-center">
-        Update Listing
-      </h2>
-
-      <form onSubmit={handleUpdate} className="space-y-5">
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Product / Pet Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            defaultValue={listings?.name}
-            placeholder="Enter product or pet name"
-            className="w-full border border-green-300 rounded-lg px-4 py-2"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Category
-          </label>
-          <select
-            name="category"
-            value={category}
-            onChange={(e) => {
-              setCategory(e.target.value);
-
-              if (e.target.value === "Pets") {
-                setPrice(0);
-              }
-            }}
-            className="w-full border border-green-300 rounded-lg px-4 py-2"
-            required
+    <div className="min-h-screen py-12 px-4 sm:px-6 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center font-sans">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="max-w-2xl w-full bg-white/20 backdrop-blur-xl border border-white/30 rounded-[2.5rem] shadow-2xl p-8 md:p-12 relative overflow-hidden"
+      >
+        <div className="flex items-center justify-between mb-8">
+          <button
+            onClick={() => navigation(-1)}
+            className="p-2 bg-white/10 hover:bg-white/30 rounded-full text-white transition-all shadow-lg"
           >
-            <option value="">Select Category</option>
-            <option value="Pets">Pets</option>
-            <option value="Food">Food</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Care Products">Care Products</option>
-          </select>
+            <ArrowLeft size={24} />
+          </button>
+          <h2 className="text-3xl font-black text-white tracking-tight text-center flex-1">
+            Update <span className="text-white/70">Listing</span>
+          </h2>
         </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Price
-          </label>
-          <input
-            type="number"
-            name="price"
-            placeholder="Enter price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            min="0"
-            required
-            readOnly={category === "Pets"}
-            className={`w-full border border-green-300 rounded-lg px-4 py-2 ${
-              category === "Pets" ? "bg-gray-200 cursor-not-allowed" : ""
-            }`}
-          />
-        </div>
+        <form onSubmit={handleUpdate} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="md:col-span-2">
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Product / Pet Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                defaultValue={listings?.name}
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:bg-white/20 transition-all shadow-inner"
+                required
+              />
+            </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            defaultValue={listings?.location}
-            className="w-full border border-green-300 rounded-lg px-4 py-2"
-            required
-          />
-        </div>
+            <div>
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Category
+              </label>
+              <select
+                name="category"
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  if (e.target.value === "Pets") setPrice(0);
+                }}
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/40 transition-all appearance-none cursor-pointer"
+                required
+              >
+                <option value="" className="text-gray-900">
+                  Select Category
+                </option>
+                <option value="Pets" className="text-gray-900">
+                  Pets
+                </option>
+                <option value="Food" className="text-gray-900">
+                  Food
+                </option>
+                <option value="Accessories" className="text-gray-900">
+                  Accessories
+                </option>
+                <option value="Care Products" className="text-gray-900">
+                  Care Products
+                </option>
+              </select>
+            </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Description
-          </label>
-          <textarea
-            name="description"
-            defaultValue={listings?.description}
-            rows="3"
-            className="w-full border border-green-300 rounded-lg px-4 py-2"
-            required
-          ></textarea>
-        </div>
+            <div>
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Price ($)
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                min="0"
+                readOnly={category === "Pets"}
+                className={`w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/40 transition-all ${
+                  category === "Pets"
+                    ? "opacity-40 cursor-not-allowed bg-black/10"
+                    : "bg-white/10"
+                }`}
+                required
+              />
+            </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Image (URL)
-          </label>
-          <input
-            type="url"
-            name="image"
-            defaultValue={listings?.image}
-            className="w-full border border-green-300 rounded-lg px-4 py-2"
-            required
-          />
-        </div>
+            <div>
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Location
+              </label>
+              <input
+                type="text"
+                name="location"
+                defaultValue={listings?.location}
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/40 transition-all"
+                required
+              />
+            </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Pick-Up Date
-          </label>
-          <input
-            type="date"
-            name="date"
-            defaultValue={today}
-            min={today}
-            className="w-full border border-green-300 rounded-lg px-4 py-2"
-            required
-          />
-        </div>
+            <div>
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Pick-Up Date
+              </label>
+              <input
+                type="date"
+                name="date"
+                defaultValue={today}
+                min={today}
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/40 transition-all invert brightness-150"
+                style={{ colorScheme: "dark" }}
+                required
+              />
+            </div>
 
-        <div>
-          <label className="block font-semibold mb-2 text-gray-700">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={user?.email || ""}
-            readOnly
-            className="w-full border border-green-300 rounded-lg px-4 py-2 bg-green-100 cursor-not-allowed"
-          />
-        </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Image (URL)
+              </label>
+              <input
+                type="url"
+                name="image"
+                defaultValue={listings?.image}
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/40 transition-all"
+                required
+              />
+            </div>
 
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg"
-        >
-          Submit
-        </button>
-      </form>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-bold text-white mb-2 ml-1">
+                Description
+              </label>
+              <textarea
+                name="description"
+                defaultValue={listings?.description}
+                rows="3"
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-5 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/40 transition-all resize-none"
+                required
+              ></textarea>
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-bold text-white mb-2 ml-1 opacity-60">
+                Owner Email (Locked)
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={user?.email || ""}
+                readOnly
+                className="w-full bg-black/10 border border-white/10 rounded-2xl px-5 py-3 text-white/50 cursor-not-allowed italic font-mono"
+              />
+            </div>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            className="w-full py-4 mt-6 bg-white text-indigo-600 font-black text-lg rounded-2xl shadow-[0_10px_20px_-10px_rgba(255,255,255,0.4)] hover:bg-opacity-95 transition-all flex items-center justify-center gap-2"
+          >
+            <Save size={20} />
+            Update Product Details
+          </motion.button>
+        </form>
+      </motion.div>
     </div>
   );
 };

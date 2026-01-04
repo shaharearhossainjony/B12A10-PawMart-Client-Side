@@ -19,7 +19,7 @@ const HeroSlider = () => {
   ];
 
   return (
-    <div className="pt-8 pb-8 px-4">
+    <div className="pt-8 pb-8 px-4 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500">
       <Swiper
         navigation={true}
         modules={[Navigation, Autoplay]}
@@ -36,7 +36,7 @@ const HeroSlider = () => {
                 alt="pet"
               />
               <div className="absolute inset-0 bg-black/40 rounded-xl"></div>
-              <h1 className="absolute top-1/2 left-10 -translate-y-1/2 text-3xl md:text-5xl font-bold text-amber-400 w-[70%] drop-shadow-lg">
+              <h1 className="absolute top-1/2 left-10 -translate-y-1/2 text-3xl md:text-5xl font-bold text-pink-500 w-[70%] drop-shadow-lg">
                 <Typewriter
                   words={[taglines[index]]}
                   loop={0}

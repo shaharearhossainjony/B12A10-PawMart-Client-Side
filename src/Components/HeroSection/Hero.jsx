@@ -3,7 +3,7 @@ import { Typewriter } from "react-simple-typewriter";
 
 const HeroSection = () => {
   return (
-    <div className="w-full  py-20 px-6">
+    <div className="w-full  py-20 px-6 bg-gradient-to-b to-indigo-500 via-purple-500 from-pink-500">
       <div className="max-w-6xl w-full text-center 
                   bg-white/20 backdrop-blur-md 
                   border border-white/30 
@@ -23,7 +23,7 @@ const HeroSection = () => {
           </span>
         </h1>
 
-        <p className="bg-gradient-to-r from-[#ff7f50] to-[#ffd700] text-transparent bg-clip-text text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="text-white text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
           PawMart is your trusted place to adopt loving pets and buy essential 
           pet supplies. Explore thousands of listings, meet caring pet owners,
           and give your furry friends the life they deserve.

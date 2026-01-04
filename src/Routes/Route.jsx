@@ -12,6 +12,9 @@ import Error404 from "../Components/Error404/Error404";
 import ShopByCategory from "../Components/ShopByCategory/ShopByCategory";
 import EditListings from "../Components/EditListings/EditListings";
 import PrivateRoute from "../Provider/PrivateRoute";
+import Contact from "../Components/Contact/Contact";
+import TermsAndConditions from "../Components/Terms-and-Conditions/TermsAndConditions";
+import DashboardLayout from "../Pages/DashboardLayout";
 
 
 const router = createBrowserRouter([
@@ -58,8 +61,21 @@ const router = createBrowserRouter([
       {
         path: "/edit-listings/:id",
         element: <EditListings></EditListings>,
+      },
+      {
+        path : '/contact',
+        element: <Contact></Contact>
+      },
+      {
+        path : '/terms-and-conditions',
+        element: <TermsAndConditions></TermsAndConditions>
       }
     ],
+  },
+  {
+    path:'/dashboard',
+    element:<DashboardLayout></DashboardLayout>
+
   },
   {
     path: "/*",
